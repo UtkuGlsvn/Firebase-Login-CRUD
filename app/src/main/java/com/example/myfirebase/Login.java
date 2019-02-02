@@ -1,5 +1,6 @@
 package com.example.myfirebase;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -23,6 +24,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login extends AppCompatActivity {
     TextView signup;
     Button login;
+    ProgressDialog dialog;
+
     EditText email,password;
     private FirebaseAuth auth;
     @Override
@@ -34,6 +37,7 @@ public class Login extends AppCompatActivity {
         login=findViewById(R.id.btn_login);
         email=findViewById(R.id.login_mail);
         password=findViewById(R.id.login_password);
+        dialog=new ProgressDialog(this);
 
         auth = FirebaseAuth.getInstance();
         internetControl();
@@ -86,6 +90,8 @@ public class Login extends AppCompatActivity {
     void loginControl(String email, final String password)
     {
         if(emptyCheck( email,password)) {
+            dialog.setMessage("loading...");
+            dialog.show();
             auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -101,6 +107,7 @@ public class Login extends AppCompatActivity {
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
+                                dialog.dismiss();
                                 Toast.makeText(getBaseContext(), "Successful Login", Toast.LENGTH_SHORT).show();
                             }
                         }
