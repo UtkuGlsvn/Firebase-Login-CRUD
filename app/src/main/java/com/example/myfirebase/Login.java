@@ -1,6 +1,9 @@
 package com.example.myfirebase;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,11 +36,8 @@ public class Login extends AppCompatActivity {
         password=findViewById(R.id.login_password);
 
         auth = FirebaseAuth.getInstance();
-/*
-        if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
-        }*/
+        internetControl();
+
         auth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +70,18 @@ public class Login extends AppCompatActivity {
             return false;
         }
        return  true;
+    }
+
+    void internetControl()
+    {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if(isConnected==false)
+            Toast.makeText(getBaseContext(),"Not connected internet!",Toast.LENGTH_SHORT).show();
+
     }
     void loginControl(String email, final String password)
     {
