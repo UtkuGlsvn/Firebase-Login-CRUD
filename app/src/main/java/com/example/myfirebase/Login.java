@@ -103,6 +103,7 @@ public class Login extends AppCompatActivity {
                                 } else {
                                     Toast.makeText(getBaseContext(), "no membership found...", Toast.LENGTH_SHORT).show();
                                 }
+                                dialog.dismiss();
                             } else {
                                 Intent intent = new Intent(Login.this, MainActivity.class);
                                 startActivity(intent);
