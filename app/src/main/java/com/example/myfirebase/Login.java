@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
                 activeNetwork.isConnectedOrConnecting();
         if(isConnected==false)
             Toast.makeText(getBaseContext(),"Not connected internet!",Toast.LENGTH_SHORT).show();
-
+        return;
     }
     void loginControl(String email, final String password)
     {
@@ -101,6 +101,7 @@ public class Login extends AppCompatActivity {
                                 if (password.length() < 6) {
                                     Toast.makeText(getBaseContext(), "The password should be 6 characters at least!", Toast.LENGTH_SHORT).show();
                                 } else {
+                                    internetControl();
                                     Toast.makeText(getBaseContext(), "no membership found...", Toast.LENGTH_SHORT).show();
                                 }
                                 dialog.dismiss();

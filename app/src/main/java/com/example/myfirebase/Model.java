@@ -4,10 +4,19 @@ public class Model {
 
 
     private String data,name,surname,gender,id;
+    public Model()
+    {
 
+    }
     public Model(String id,String data, String name, String surname, String gender) {
         this.id=id;
         this.data = data;
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+    }
+
+    public Model(String name, String surname, String gender) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
