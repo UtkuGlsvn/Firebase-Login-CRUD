@@ -1,5 +1,6 @@
 package com.example.myfirebase;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -57,12 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-//        String uID=mauth.getUid();
-
-
         mauth=FirebaseAuth.getInstance();
         mdatabase= FirebaseDatabase.getInstance().getReference().child("NameList");//.child(uID);
+        String uID=mauth.getUid();
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
@@ -204,4 +205,21 @@ static class ViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.logout:
+                mauth.signOut();
+                Toast.makeText(getApplicationContext(),"Logout Succesful",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),Login.class));
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
