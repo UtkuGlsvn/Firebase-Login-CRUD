@@ -2,6 +2,7 @@ package com.example.myfirebase;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -172,6 +173,12 @@ public class MainActivity extends AppCompatActivity {
                 holder.setName("Name:"+model.getName());
                 holder.setSurname("Surname:"+model.getSurname());
                 holder.setGender("Gender:"+model.getGender());
+                holder.myview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mydialog();
+                    }
+                });
 
                             }
 
@@ -221,5 +228,19 @@ static class ViewHolder extends RecyclerView.ViewHolder {
                 startActivity(new Intent(getApplicationContext(),Login.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    void  mydialog(){
+        AlertDialog.Builder mydialog = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater layoutInflater =LayoutInflater.from(MainActivity.this);
+
+        View myview = layoutInflater.inflate(R.layout.mydialogbox,null);
+        mydialog.setView(myview);
+
+        AlertDialog dialog = mydialog.create();
+
+        dialog.show();
+
+
     }
 }
