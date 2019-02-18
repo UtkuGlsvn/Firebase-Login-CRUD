@@ -128,13 +128,18 @@ public class Login extends AppCompatActivity {
         updateUI(currentUser);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             startActivity(new Intent(Login.this,MainActivity.class));
             finish();
 
-        } else {
-            Toast.makeText(Login.this,"hata",Toast.LENGTH_SHORT).show();
         }
     }
 }

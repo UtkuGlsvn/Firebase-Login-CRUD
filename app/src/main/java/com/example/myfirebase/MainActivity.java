@@ -130,16 +130,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         adapter.startListening();
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         adapter.stopListening();
+
     }
 
-//recycler view list
+   @Override
+    public void onBackPressed() {
+       super.onBackPressed();
+       startActivity(new Intent(MainActivity.this,Login.class));
+       mauth.signOut();
+    }
+
+    //recycler view list
     private void fetch() {
 
         Query query = FirebaseDatabase.getInstance()
