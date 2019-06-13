@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         internetControl();
 
-        auth = FirebaseAuth.getInstance();
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
